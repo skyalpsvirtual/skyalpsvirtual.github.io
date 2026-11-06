@@ -1,0 +1,28 @@
+{
+ "backfilledFrom": "2026-11-01",
+ "flights": {
+  "dcda3e58f791": {
+   "id": "dcda3e58f791",
+   "flightNumber": "SWU1952",
+   "dep": "LIPB",
+   "arr": "EDDL",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-05T16:02:18.771Z",
+   "blockMin": 92,
+   "rating": 9.52,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 121,
+    "pingsTotal": 121,
+    "ratio": 1,
+    "lastPing": "2026-11-05T16:01:55.123Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
+  }
+ }
+}

@@ -1,9 +1,41 @@
 {
-  "status": "pending",
-  "generatedAt": null,
-  "totals": { "flights": 0, "blockMinutes": 0, "pilots": 0, "pax": 0, "avgRating": null },
-  "last30": { "flights": 0, "blockMinutes": 0 },
-  "recent": [],
-  "topPilots": [],
-  "topRoutes": []
+  "generatedAt": "2026-11-06T01:56:09.487Z",
+  "status": "ok",
+  "totals": {
+    "flights": 1,
+    "blockMinutes": 92,
+    "pilots": 1,
+    "pax": 78,
+    "avgRating": 9.5
+  },
+  "last30": {
+    "flights": 1,
+    "blockMinutes": 92
+  },
+  "recent": [
+    {
+      "flightNumber": "SWU1952",
+      "dep": "LIPB",
+      "arr": "EDDL",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 92,
+      "rating": 9.52,
+      "date": "2026-11-05T16:02:18.771Z"
+    }
+  ],
+  "topPilots": [
+    {
+      "name": "Athan C.",
+      "flights": 1,
+      "blockMinutes": 92
+    }
+  ],
+  "topRoutes": [
+    {
+      "dep": "LIPB",
+      "arr": "EDDL",
+      "flights": 1
+    }
+  ]
 }
