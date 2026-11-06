@@ -327,7 +327,9 @@
     if (!s || !s.totals) return;
     const t = s.totals;
     $("#st-flights").textContent = fmtNum(t.flights || 0);
-    $("#st-hours").textContent = fmtNum(Math.round((t.blockMinutes || 0) / 60));
+    // One decimal under 10 h, so a single 1h32 flight reads "1.5" instead of "2".
+    const hours = (t.blockMinutes || 0) / 60;
+    $("#st-hours").textContent = hours < 10 ? String(Math.round(hours * 10) / 10) : fmtNum(Math.round(hours));
     $("#st-pilots").textContent = fmtNum(t.pilots || 0);
     $("#st-rating").textContent = fmtRating(t.avgRating);
     if (s.generatedAt) {
@@ -357,7 +359,7 @@
         ...s.topPilots.map((p) =>
           el("li", {},
             el("strong", { text: p.name }),
-            el("span", { text: `${p.flights} flt · ${Math.round(p.blockMinutes / 60)} h` })
+            el("span", { text: `${p.flights} flt · ${fmtBlock(p.blockMinutes)}` })
           )
         )
       );
