@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkyAlps Virtual — Fly the Dolomites on Newsky</title>
+  <meta name="description" content="SkyAlps Virtual is a free virtual airline on Newsky that recreates SkyAlps' Dash 8-400 network from Bolzano: real routes, real flight numbers, real timetables. MSFS and X-Plane.">
+  <meta name="theme-color" content="#04140e">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SkyAlps Virtual — Fly the Dolomites on Newsky">
+  <meta property="og:description" content="Real SkyAlps routes and timetables, flown in the Dash 8-400 and tracked on Newsky. Free to join.">
+  <meta property="og:image" content="assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Exo+2:ital,wght@0,700;0,800;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a class="nav__brand" href="#top" aria-label="SkyAlps Virtual home">
+        <img src="assets/img/logo-virtual-white.png" alt="SkyAlps Virtual" width="149" height="44">
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+      <nav class="nav__links" id="nav-links" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#network">Network</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#live">Live ops</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn--mint btn--sm js-join" href="#join">Join the crew</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <picture class="hero__bg">
+        <source media="(max-width: 900px)" srcset="assets/img/hero-1200.jpg">
+        <img src="assets/img/hero-2400.jpg" alt="SkyAlps Dash 8-400 flying over the Dolomites" fetchpriority="high">
+      </picture>
+      <div class="hero__shade"></div>
+      <div class="wrap hero__content">
+        <p class="eyebrow">A virtual airline on Newsky</p>
+        <h1>Born in the Dolomites.<br><span>Flown by you.</span></h1>
+        <p class="hero__lead">
+          SkyAlps Virtual recreates the Dash&nbsp;8-400 network of SkyAlps from Bolzano: real routes,
+          real flight numbers and real timetables, tracked automatically on Newsky.
+          Free to join, on MSFS and X-Plane.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--mint js-join" href="#join">Join the crew</a>
+          <a class="btn btn--ghost" href="#network">Explore the network</a>
+        </div>
+      </div>
+      <div class="hero__strip">
+        <div class="wrap strip">
+          <div class="strip__item"><strong data-stat="routes">34</strong><span>routes</span></div>
+          <div class="strip__item"><strong data-stat="airports">35</strong><span>airports</span></div>
+          <div class="strip__item"><strong>DH8D</strong><span>Dash 8-400 fleet</span></div>
+          <div class="strip__item"><strong>LIPB</strong><span>Bolzano hub</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section section--snow" id="about">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow eyebrow--dark">Why SkyAlps Virtual</p>
+          <h2>Regional flying, the alpine way.</h2>
+          <p class="section__lead">
+            SkyAlps is Bolzano's own airline. It connects South Tyrol with Europe using one aircraft type
+            and a network built around the seasons: ski traffic in winter, Mediterranean islands in summer.
+            We fly that network in the simulator, with the same timetables.
+          </p>
+        </header>
+        <div class="features">
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+            </div>
+            <h3>A real airline's network</h3>
+            <p><span data-stat="routes">34</span> routes taken from the official SkyAlps 2026/27 timetable: Bolzano to Hamburg, London, Paris and the Greek islands, plus the Rome and Mostar operations.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M2 13l8-2 4-7h2l-2 7 6 1v2l-6 1 2 7h-2l-4-7-8-2z"/></svg>
+            </div>
+            <h3>One aircraft, mastered</h3>
+            <p>An all Dash&nbsp;8-400 fleet. Short sectors, quick turnarounds and turboprop flying at its best, from 55-minute hops to 2&frac12;-hour island runs.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M2 20l6-10 4 6 3-4 7 8z"/></svg>
+            </div>
+            <h3>Alpine approaches</h3>
+            <p>Bolzano sits in a narrow valley surrounded by peaks. Every arrival home is a real challenge, and Newsky scores every landing.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 5h16v11H4zM8 20h8M12 16v4"/></svg>
+            </div>
+            <h3>Tracked automatically</h3>
+            <p>Newsky's free app logs your flight, files the PIREP and rates it. Your flights earn revenue in a shared economy where every virtual airline competes for passengers.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NETWORK -->
+    <section class="section section--light" id="network">
+      <div class="wrap">
+        <header class="section__head section__head--row">
+          <div>
+            <p class="eyebrow eyebrow--dark">Route network</p>
+            <h2>From Bolzano to <span class="accent-text">Europe</span>.</h2>
+            <p class="section__lead">Every route, flight number and departure time comes from the real SkyAlps timetable. Pick a route to see when it operates.</p>
+          </div>
+          <div class="filters" role="group" aria-label="Filter routes">
+            <button class="chip is-active" data-filter="current">This season</button>
+            <button class="chip" data-filter="all">All routes</button>
+            <button class="chip" data-filter="summer">Summer</button>
+            <button class="chip" data-filter="winter">Winter</button>
+            <button class="chip" data-filter="new">New</button>
+          </div>
+        </header>
+
+        <div class="network">
+          <div class="network__map">
+            <div id="map" role="img" aria-label="Map of SkyAlps Virtual routes"></div>
+            <ul class="legend" aria-label="Legend">
+              <li><i class="dot dot--year"></i>All year</li>
+              <li><i class="dot dot--winter"></i>Winter only</li>
+              <li><i class="dot dot--summer"></i>Summer only</li>
+            </ul>
+          </div>
+          <aside class="network__list">
+            <div class="network__count"><strong id="route-count">0</strong> routes shown</div>
+            <ul id="route-list" class="routes"></ul>
+          </aside>
+        </div>
+
+        <div class="route-detail" id="route-detail" hidden>
+          <div class="route-detail__head">
+            <div>
+              <p class="route-detail__codes" id="rd-codes"></p>
+              <h3 id="rd-title"></h3>
+            </div>
+            <dl class="route-detail__facts">
+              <div><dt>Distance</dt><dd id="rd-dist"></dd></div>
+              <div><dt>Block time</dt><dd id="rd-block"></dd></div>
+              <div><dt>Flights</dt><dd id="rd-flights"></dd></div>
+            </dl>
+          </div>
+          <div class="tabs" id="rd-tabs" role="tablist"></div>
+          <div class="table-wrap">
+            <table class="timetable">
+              <thead>
+                <tr>
+                  <th scope="col">Day</th>
+                  <th scope="col" id="rd-out-head">Outbound</th>
+                  <th scope="col">Flight</th>
+                  <th scope="col" id="rd-back-head">Return</th>
+                  <th scope="col">Flight</th>
+                  <th scope="col">Valid</th>
+                </tr>
+              </thead>
+              <tbody id="rd-rows"></tbody>
+            </table>
+          </div>
+          <p class="fine">Local times. The timetable may change; it reflects the SkyAlps schedule published on 15 September 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLEET -->
+    <section class="section section--forest" id="fleet">
+      <div class="wrap fleet">
+        <figure class="fleet__media">
+          <img src="assets/img/fleet-q400.jpg" alt="SkyAlps De Havilland Canada Dash 8-400 in flight" loading="lazy" width="1200" height="600">
+        </figure>
+        <div class="fleet__body">
+          <p class="eyebrow">Our fleet</p>
+          <h2>De Havilland Canada Dash&nbsp;8-400</h2>
+          <p>The Q400 is the backbone of SkyAlps: fast for a turboprop, comfortable on short alpine runways and right at home on a two-hour sector to the North Sea or the Aegean.</p>
+          <dl class="specs">
+            <div><dt>Newsky airframe</dt><dd>DH8D</dd></div>
+            <div><dt>Passengers</dt><dd>up to 80</dd></div>
+            <div><dt>Cargo</dt><dd>2,700 kg</dd></div>
+            <div><dt>MTOW</dt><dd>29,574 kg</dd></div>
+            <div><dt>MLW</dt><dd>28,123 kg</dd></div>
+            <div><dt>MZFW</dt><dd>26,308 kg</dd></div>
+          </dl>
+          <p class="fine fine--light">Weights as used by Newsky for payload and landing checks. Keep ZFW, TOW and LW inside the limits or the flight is penalised.</p>
+          <div class="sims">
+            <span class="pill">MSFS 2020</span>
+            <span class="pill">MSFS 2024</span>
+            <span class="pill">X-Plane 11</span>
+            <span class="pill">X-Plane 12</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE -->
+    <section class="section section--snow" id="live">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow eyebrow--dark">Live operations</p>
+          <h2>Who's flying right now.</h2>
+          <p class="section__lead">Our flights are tracked live by Newsky. Figures below update automatically every hour.</p>
+        </header>
+
+        <div class="live">
+          <div class="live__map" id="live-map">
+            <div class="placeholder">
+              <p><strong>Live map coming soon.</strong></p>
+              <p>Flights in progress will appear here as soon as our first crews are in the air.</p>
+            </div>
+          </div>
+          <div class="live__stats">
+            <div class="tiles">
+              <div class="tile"><span class="tile__label">Flights</span><strong class="tile__value" id="st-flights">0</strong></div>
+              <div class="tile"><span class="tile__label">Block hours</span><strong class="tile__value" id="st-hours">0</strong></div>
+              <div class="tile"><span class="tile__label">Pilots</span><strong class="tile__value" id="st-pilots">0</strong></div>
+              <div class="tile"><span class="tile__label">Avg. rating</span><strong class="tile__value" id="st-rating">–</strong></div>
+            </div>
+            <p class="fine" id="st-updated"></p>
+            <div class="live__cta">
+              <p><strong>Want your name on this board?</strong> Every flight you log with SkyAlps Virtual shows up here automatically.</p>
+              <a class="btn btn--mint btn--sm" href="#join">Join the crew</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="boards">
+          <div class="board">
+            <h3>Latest PIREPs</h3>
+            <div class="table-wrap">
+              <table class="pireps">
+                <thead><tr><th scope="col">Flight</th><th scope="col">Route</th><th scope="col">Pilot</th><th scope="col">Block</th><th scope="col">Rating</th><th scope="col">Date</th></tr></thead>
+                <tbody id="pirep-rows"></tbody>
+              </table>
+            </div>
+            <p class="empty" id="pirep-empty">No flights logged yet. The first PIREP on this board could be yours.</p>
+          </div>
+          <div class="board board--narrow">
+            <h3>Top pilots <small>last 30 days</small></h3>
+            <ol class="leaders" id="leaders"></ol>
+            <p class="empty" id="leaders-empty">The leaderboard opens with the first flights.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN -->
+    <section class="section section--forest join" id="join">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">Join the crew</p>
+          <h2>Four steps to your first departure.</h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__n">1</span>
+            <h3>Create a Newsky account</h3>
+            <p>Newsky is free. Sign up with your email and confirm it.</p>
+            <a class="link" href="https://newsky.app/pilot/register" target="_blank" rel="noopener">newsky.app/pilot/register</a>
+          </li>
+          <li class="step">
+            <span class="step__n">2</span>
+            <h3>Install the Newsky app</h3>
+            <p>The Windows app connects to MSFS or X-Plane and records your flight. Nothing else to install.</p>
+            <a class="link" href="https://newsky.app/home" target="_blank" rel="noopener">Download from newsky.app</a>
+          </li>
+          <li class="step">
+            <span class="step__n">3</span>
+            <h3>Apply to SkyAlps Virtual</h3>
+            <p>Send your application to the airline on Newsky. A staff member approves it.</p>
+            <a class="link js-join-direct" href="https://newsky.app/pilot/register" target="_blank" rel="noopener">Apply on Newsky</a>
+          </li>
+          <li class="step">
+            <span class="step__n">4</span>
+            <h3>Book and fly</h3>
+            <p>Pick a scheduled flight in the app. A good first leg: Bolzano to Prague, 1&nbsp;h&nbsp;15.</p>
+            <a class="link js-discord" href="#" target="_blank" rel="noopener" hidden>Say hello on Discord</a>
+          </li>
+        </ol>
+        <div class="join__cta">
+          <a class="btn btn--mint btn--lg js-join-direct" href="https://newsky.app/pilot/register" target="_blank" rel="noopener">Apply on Newsky</a>
+          <a class="btn btn--ghost btn--lg js-discord" href="#" target="_blank" rel="noopener" hidden>Join our Discord</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--snow" id="faq">
+      <div class="wrap wrap--narrow">
+        <header class="section__head">
+          <p class="eyebrow eyebrow--dark">FAQ</p>
+          <h2>Before you push back.</h2>
+        </header>
+        <div class="faq">
+          <details>
+            <summary>Is it really free?</summary>
+            <p>Yes. SkyAlps Virtual is a non-profit hobby project and Newsky is free to use.</p>
+          </details>
+          <details>
+            <summary>Which simulators can I use?</summary>
+            <p>Microsoft Flight Simulator 2020 and 2024, X-Plane 11 and 12. The Newsky app runs on Windows.</p>
+          </details>
+          <details>
+            <summary>Which aircraft do I need?</summary>
+            <p>A Dash 8-400 that Newsky recognises as a DH8D. SkyAlps flies nothing else, and neither do we.</p>
+          </details>
+          <details>
+            <summary>Do I have to fly on VATSIM or IVAO?</summary>
+            <p>No. Online networks are welcome but never required.</p>
+          </details>
+          <details>
+            <summary>What happens if my simulator crashes mid-flight?</summary>
+            <p>Newsky detects interrupted flights. Let a staff member know on Discord and we'll sort it out.</p>
+          </details>
+          <details>
+            <summary>Are you the real SkyAlps?</summary>
+            <p>No. SkyAlps Virtual is a flight simulation community. We are not affiliated with SkyAlps, and nothing on this site is a real flight or a real ticket.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <img src="assets/img/logo-virtual-white.png" alt="SkyAlps Virtual" width="176" height="52" loading="lazy">
+        <p>A virtual airline on <a href="https://newsky.app" target="_blank" rel="noopener">Newsky</a>.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#network">Network</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#live">Live ops</a>
+        <a href="#join">Join</a>
+        <a class="js-discord" href="#" target="_blank" rel="noopener" hidden>Discord</a>
+        <a class="js-contact" href="#" hidden>Contact</a>
+      </nav>
+      <p class="footer__legal">
+        SkyAlps Virtual is a non-profit flight simulation community. It is not affiliated with, endorsed by or
+        connected to SkyAlps or its parent companies. The SkyAlps name, logo and aircraft imagery belong to their
+        respective owners and are used here for simulation purposes only. Not for real-world travel.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
