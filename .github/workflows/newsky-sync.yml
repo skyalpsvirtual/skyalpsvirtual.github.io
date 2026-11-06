@@ -24,11 +24,15 @@ jobs:
     outputs:
       changed: ${{ steps.sync.outputs.changed }}
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      # Always the latest version of main, even when an old run is re-run:
+      # an old commit would publish an old site and could not push the new stats.
+      - uses: actions/checkout@v7
         with:
-          node-version: 20
+          ref: main
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
 
       - name: Sync flights from Newsky
         id: sync
@@ -42,13 +46,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data-cache site/data/stats.json
-          git diff --staged --quiet || git commit -m "Update Newsky stats"
-          git push
+          git diff --staged --quiet && exit 0
+          git commit -m "Update Newsky stats"
+          # A file may have been changed on GitHub while this run was working:
+          # put the stats commit on top of the latest main, then push.
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            sleep 10
+          done
+          echo "::error title=Stats not saved::Could not push the updated stats to main after 3 attempts."
+          exit 1
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
         if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
         with:
           path: site
@@ -62,4 +74,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
