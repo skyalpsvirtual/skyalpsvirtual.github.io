@@ -24,7 +24,8 @@ const STATS_FILE = resolve(ROOT, "site/data/stats.json");
 const API = "https://newsky.app/api/airline-api";
 const DAY = 86_400_000;
 
-const KEY = process.env.NEWSKY_API_KEY || "";
+// Trimmed: a space or line break pasted with the secret would make every request fail.
+const KEY = (process.env.NEWSKY_API_KEY || "").trim();
 const SINCE = process.env.NEWSKY_SINCE || "2026-11-01";
 const NAMES = (process.env.NEWSKY_PILOT_NAMES || "short").toLowerCase();
 const MOCK = process.env.NEWSKY_MOCK_FILE || "";
@@ -34,25 +35,40 @@ const INSPECT = process.argv.includes("--inspect");
 let lastCall = 0;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+const ATTEMPTS = 5;
+
 async function api(path, body) {
-  for (let attempt = 1; attempt <= 4; attempt++) {
+  for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
     const wait = lastCall + 2100 - Date.now();
     if (wait > 0) await sleep(wait);
     lastCall = Date.now();
-    const res = await fetch(`${API}/${path}`, {
-      method: body ? "POST" : "GET",
-      headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json", Accept: "application/json" },
-      body: body ? JSON.stringify(body) : undefined,
-    });
+    let res;
+    try {
+      res = await fetch(`${API}/${path}`, {
+        method: body ? "POST" : "GET",
+        headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json", Accept: "application/json" },
+        body: body ? JSON.stringify(body) : undefined,
+        signal: AbortSignal.timeout(30_000),
+      });
+    } catch (err) {
+      // Network hiccup or timeout: wait a little longer each time, then try again.
+      if (attempt < ATTEMPTS) { await sleep(attempt * 5000); continue; }
+      throw new Error(`Newsky API ${path}: no answer after ${ATTEMPTS} attempts (${err.cause?.code || err.message}).`);
+    }
     if (res.status === 429) {
       const reset = Number(res.headers.get("x-rate-limit-reset") || res.headers.get("retry-after") || 10);
       await sleep(Math.min(Math.max(reset, 2), 30) * 1000);
       continue;
     }
+    if (res.status >= 500 && attempt < ATTEMPTS) { await sleep(attempt * 5000); continue; }
+    if (res.status === 401 || res.status === 403) {
+      throw new Error(`Newsky refused the API key (HTTP ${res.status}). Check the NEWSKY_API_KEY secret in GitHub: `
+        + `it must be the key with the "flights" permission, copied in full.`);
+    }
     if (!res.ok) throw new Error(`Newsky API ${path} -> HTTP ${res.status}: ${(await res.text()).slice(0, 300)}`);
     return res.json();
   }
-  throw new Error(`Newsky API ${path}: still rate-limited after 4 attempts`);
+  throw new Error(`Newsky API ${path}: still rate-limited after ${ATTEMPTS} attempts.`);
 }
 
 /** All flights between two dates (API max span is 30 days, max 100 per page). */
@@ -232,6 +248,13 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err.message || err);
+  const message = String(err.message || err);
+  if (process.env.GITHUB_ACTIONS) {
+    // Shown as an annotation on the run's summary page, readable without opening the logs.
+    const escaped = message.replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
+    console.log(`::error title=Newsky sync failed::${escaped}`);
+  } else {
+    console.error(message);
+  }
   process.exit(1);
 });
