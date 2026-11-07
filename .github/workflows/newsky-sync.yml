@@ -57,6 +57,14 @@ jobs:
           echo "::error title=Stats not saved::Could not push the updated stats to main after 3 attempts."
           exit 1
 
+      # Maintenance mode: repository variable MAINTENANCE_MODE = "on"
+      # (Settings > Secrets and variables > Actions > Variables).
+      # The published home page becomes site/maintenance.html; the files in the repository are not changed.
+      # Must stay after "Commit updated data": that step rebases, which needs a clean working tree.
+      - name: Maintenance mode
+        if: vars.MAINTENANCE_MODE == 'on'
+        run: cp site/maintenance.html site/index.html
+
       - uses: actions/configure-pages@v6
         if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
 
