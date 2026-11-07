@@ -46,6 +46,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "bba6ceeecfb0": {
+   "id": "bba6ceeecfb0",
+   "flightNumber": "SWU1950",
+   "dep": "LIPB",
+   "arr": "EDDB",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-07T17:05:17.062Z",
+   "blockMin": 96,
+   "rating": 9.71,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 130,
+    "pingsTotal": 131,
+    "ratio": 0.9923664122137404,
+    "lastPing": "2026-11-07T17:04:17.506Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
