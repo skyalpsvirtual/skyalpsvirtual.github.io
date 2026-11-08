@@ -1,18 +1,28 @@
 {
-  "generatedAt": "2026-11-07T20:49:42.808Z",
+  "generatedAt": "2026-11-08T19:32:48.305Z",
   "status": "ok",
   "totals": {
-    "flights": 3,
-    "blockMinutes": 300,
+    "flights": 4,
+    "blockMinutes": 404,
     "pilots": 1,
-    "pax": 234,
-    "avgRating": 9.7
+    "pax": 312,
+    "avgRating": 9.8
   },
   "last30": {
-    "flights": 3,
-    "blockMinutes": 300
+    "flights": 4,
+    "blockMinutes": 404
   },
   "recent": [
+    {
+      "flightNumber": "SWU1951",
+      "dep": "EDDB",
+      "arr": "LIPB",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 104,
+      "rating": 10,
+      "date": "2026-11-08T16:40:40.409Z"
+    },
     {
       "flightNumber": "SWU1950",
       "dep": "LIPB",
@@ -47,11 +57,16 @@
   "topPilots": [
     {
       "name": "Athan C.",
-      "flights": 3,
-      "blockMinutes": 300
+      "flights": 4,
+      "blockMinutes": 404
     }
   ],
   "topRoutes": [
+    {
+      "dep": "EDDB",
+      "arr": "LIPB",
+      "flights": 1
+    },
     {
       "dep": "LIPB",
       "arr": "EDDB",
