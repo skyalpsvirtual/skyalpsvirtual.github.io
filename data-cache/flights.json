@@ -92,6 +92,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "52ba5088f886": {
+   "id": "52ba5088f886",
+   "flightNumber": "SWU1932",
+   "dep": "LIPB",
+   "arr": "EGKK",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-09T19:22:29.356Z",
+   "blockMin": 151,
+   "rating": 9.92,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 180,
+    "pingsTotal": 180,
+    "ratio": 1,
+    "lastPing": "2026-11-09T19:21:39.850Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
