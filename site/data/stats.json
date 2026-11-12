@@ -1,18 +1,28 @@
 {
-  "generatedAt": "2026-11-10T00:13:52.135Z",
+  "generatedAt": "2026-11-12T01:28:31.188Z",
   "status": "ok",
   "totals": {
-    "flights": 5,
-    "blockMinutes": 555,
+    "flights": 6,
+    "blockMinutes": 692,
     "pilots": 1,
-    "pax": 390,
-    "avgRating": 9.8
+    "pax": 468,
+    "avgRating": 9.9
   },
   "last30": {
-    "flights": 5,
-    "blockMinutes": 555
+    "flights": 6,
+    "blockMinutes": 692
   },
   "recent": [
+    {
+      "flightNumber": "SWU1933",
+      "dep": "EGKK",
+      "arr": "LIPB",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 137,
+      "rating": 10,
+      "date": "2026-11-11T18:53:38.249Z"
+    },
     {
       "flightNumber": "SWU1932",
       "dep": "LIPB",
@@ -67,11 +77,16 @@
   "topPilots": [
     {
       "name": "Athan C.",
-      "flights": 5,
-      "blockMinutes": 555
+      "flights": 6,
+      "blockMinutes": 692
     }
   ],
   "topRoutes": [
+    {
+      "dep": "EGKK",
+      "arr": "LIPB",
+      "flights": 1
+    },
     {
       "dep": "LIPB",
       "arr": "EGKK",
@@ -90,11 +105,6 @@
     {
       "dep": "EDDL",
       "arr": "LIPB",
-      "flights": 1
-    },
-    {
-      "dep": "LIPB",
-      "arr": "EDDL",
       "flights": 1
     }
   ]
