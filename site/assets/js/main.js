@@ -5,7 +5,6 @@
   const CFG = window.SKYALPS_CONFIG || {};
   const COLORS = { year: "#12844b", winter: "#1f5fae", summer: "#ee6a1f" };
   const TYPE_LABEL = { year: "All year", winter: "Winter", summer: "Summer" };
-  const DAY = { MON: "Mon", TUE: "Tue", WED: "Wed", THU: "Thu", FRI: "Fri", SAT: "Sat", SUN: "Sun" };
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
@@ -27,7 +26,34 @@
   const parseDay = (iso) => new Date(`${iso}T12:00:00`);
   const fmtDate = (iso, withYear) =>
     parseDay(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", ...(withYear ? { year: "numeric" } : {}) });
-  const fmtRange = (from, to) => (from === to ? `${fmtDate(from, true)} only` : `${fmtDate(from)} – ${fmtDate(to, true)}`);
+  const fmtRange = (from, to) =>
+    from === to ? `${fmtDate(from, true)} only` : `${fmtDate(from, from.slice(0, 4) !== to.slice(0, 4))} – ${fmtDate(to, true)}`;
+
+  /* Merge timetable validity windows (ISO dates) into continuous periods.
+     A gap of a week or less is just the weekly rhythm of the route, not a pause. */
+  const gapDays = (a, b) => (Date.parse(b) - Date.parse(a)) / 864e5;
+  function mergePeriods(rows) {
+    const out = [];
+    for (const { from, to } of [...rows].sort((a, b) => a.from.localeCompare(b.from))) {
+      const last = out[out.length - 1];
+      if (last && gapDays(last.to, from) <= 7) { if (to > last.to) last.to = to; }
+      else out.push({ from, to });
+    }
+    return out;
+  }
+
+  /* One row per outbound/return flight pair and period, instead of one row per weekday and time. */
+  function rotations(rows) {
+    const pairs = new Map();
+    for (const row of rows) {
+      const key = `${row.out[2]}|${row.back[2]}`;
+      if (!pairs.has(key)) pairs.set(key, { out: row.out[2], back: row.back[2], rows: [] });
+      pairs.get(key).rows.push(row);
+    }
+    return [...pairs.values()]
+      .flatMap((p) => mergePeriods(p.rows).map((period) => ({ out: p.out, back: p.back, ...period })))
+      .sort((a, b) => a.from.localeCompare(b.from) || String(a.out).localeCompare(String(b.out)));
+  }
 
   /* ---------- Navigation ---------- */
   const nav = $(".nav");
@@ -86,8 +112,19 @@
     const winter = seasons.filter((s) => s.code.startsWith("W")).map((s) => s.code);
     const runsIn = (r, codes) => codes.some((c) => r.seasons[c] && r.seasons[c].length);
 
+    // Where each route stands today: flying, starting or resuming later, or done for the timetable.
+    for (const r of routes) {
+      const periods = mergePeriods(Object.values(r.seasons).flat());
+      const next = periods.find((p) => p.from > today);
+      if (periods.some((p) => p.from <= today && today <= p.to)) r.status = { key: "now" };
+      else if (next) r.status = { key: "soon", text: `${periods[0].from < today ? "Resumes" : "From"} ${fmtDate(next.from)}` };
+      else r.status = { key: "off", text: "Season ended" };
+    }
+    const live = (r) => r.status.key === "now";
+
     const FILTERS = {
-      current: (r) => runsIn(r, [current.code]),
+      now: live,
+      soon: (r) => r.status.key === "soon",
       all: () => true,
       summer: (r) => runsIn(r, summer),
       winter: (r) => runsIn(r, winter),
@@ -96,11 +133,18 @@
 
     $$('[data-stat="routes"]').forEach((n) => (n.textContent = routes.length));
     $$('[data-stat="airports"]').forEach((n) => (n.textContent = Object.keys(airports).length));
-    const currentChip = $('[data-filter="current"]');
-    currentChip.textContent = `This season · ${current.label}`;
+    $('[data-filter="soon"]').hidden = !routes.some(FILTERS.soon);
 
     const city = (icao) => airports[icao].city;
     const iata = (icao) => airports[icao].iata;
+    const byId = new Map(routes.map((r) => [r.id, r]));
+    // Dashed and lighter when the route is not flying today. level: 0 rest, 1 hover, 2 selected.
+    const lineStyle = (r, level = 0) => ({
+      color: COLORS[r.type],
+      weight: [2.2, 4, 4.5][level],
+      opacity: level ? 1 : live(r) ? 0.75 : 0.55,
+      dashArray: live(r) ? null : "5 7",
+    });
 
     /* Map */
     let map = null;
@@ -116,9 +160,7 @@
       map.on("click", () => map.scrollWheelZoom.enable());
 
       for (const r of routes) {
-        const line = L.polyline(arcPoints(airports[r.from], airports[r.to]), {
-          color: COLORS[r.type], weight: 2.2, opacity: 0.75, lineCap: "round",
-        });
+        const line = L.polyline(arcPoints(airports[r.from], airports[r.to]), { ...lineStyle(r), lineCap: "round" });
         line.on("mouseover", () => hover(r.id, true));
         line.on("mouseout", () => hover(r.id, false));
         line.on("click", (e) => { L.DomEvent.stopPropagation(e); select(r.id, false); });
@@ -159,10 +201,13 @@
           onmouseenter: () => hover(r.id, true),
           onmouseleave: () => hover(r.id, false),
         },
-        el("span", { class: "route__bar", style: `background:${COLORS[r.type]}` }),
+        el("span", { class: `route__bar${live(r) ? "" : " route__bar--later"}`, style: `--c:${COLORS[r.type]}` }),
         el("span", {},
           el("span", { class: "route__name" }, `${city(r.from)} – ${city(r.to)}`, ...badges),
-          el("span", { class: "route__meta", text: `${iata(r.from)}–${iata(r.to)} · ${TYPE_LABEL[r.type]}` })
+          el("span", { class: "route__meta" },
+            `${iata(r.from)}–${iata(r.to)} · ${TYPE_LABEL[r.type]}`,
+            r.status.text ? el("span", { class: `route__when route__when--${r.status.key}`, text: ` · ${r.status.text}` }) : null
+          )
         ),
         el("span", { class: "route__side" }, `${r.distanceNm} nm`, el("br"), fmtBlock(r.blockMin))
       );
@@ -170,8 +215,10 @@
       items.set(r.id, { li, btn });
       list.append(li);
     }
+    const emptyItem = el("li", { class: "empty empty--list", text: "No route in this view today." });
+    list.append(emptyItem);
 
-    let filter = "current";
+    let filter = "now";
     let selected = null;
 
     function applyFilter() {
@@ -186,6 +233,8 @@
         }
       }
       $("#route-count").textContent = visible.length;
+      emptyItem.hidden = visible.length > 0;
+      $("#legend-later").hidden = visible.every(live);
       if (map) {
         const served = new Set(visible.flatMap((r) => [r.from, r.to]));
         for (const [icao, marker] of markers) {
@@ -211,7 +260,7 @@
       if (!map) return;
       const line = arcs.get(id);
       if (id === selected) return;
-      line.setStyle(on ? { weight: 4, opacity: 1 } : { weight: 2.2, opacity: 0.75 });
+      line.setStyle(lineStyle(byId.get(id), on ? 1 : 0));
       if (on) line.bringToFront();
     }
 
@@ -220,8 +269,8 @@
         items.get(selected).btn.classList.remove("is-selected");
         items.get(selected).btn.setAttribute("aria-pressed", "false");
         if (map) {
-          arcs.get(selected).setStyle({ weight: 2.2, opacity: 0.75 });
-          const old = routes.find((x) => x.id === selected);
+          const old = byId.get(selected);
+          arcs.get(selected).setStyle(lineStyle(old));
           for (const icao of [old.from, old.to]) if (icao !== "LIPB") markers.get(icao).closeTooltip();
         }
       }
@@ -232,13 +281,13 @@
     function select(id, fromList) {
       clearSelection();
       selected = id;
-      const r = routes.find((x) => x.id === id);
+      const r = byId.get(id);
       const { btn } = items.get(id);
       btn.classList.add("is-selected");
       btn.setAttribute("aria-pressed", "true");
       if (map) {
         const line = arcs.get(id);
-        line.setStyle({ weight: 4.5, opacity: 1 }).bringToFront();
+        line.setStyle(lineStyle(r, 2)).bringToFront();
         if (fromList) map.flyToBounds(line.getBounds(), { padding: [70, 70], maxZoom: 6, duration: 0.6 });
         if (r.from !== "LIPB") markers.get(r.from).openTooltip();
         markers.get(r.to).openTooltip();
@@ -276,16 +325,16 @@
         );
       const drawRows = () =>
         $("#rd-rows").replaceChildren(
-          ...r.seasons[active.code].map((row) =>
-            el("tr", {},
-              el("td", { text: DAY[row.day] }),
-              el("td", { class: "mono", text: `${row.out[0]} → ${row.out[1]}` }),
-              el("td", { class: "mono", text: row.out[2] || "–" }),
-              el("td", { class: "mono", text: `${row.back[0]} → ${row.back[1]}` }),
-              el("td", { class: "mono", text: row.back[2] || "–" }),
-              el("td", { text: fmtRange(row.from, row.to) })
-            )
-          )
+          ...rotations(r.seasons[active.code]).map((rot) => {
+            const [key, text] =
+              rot.to < today ? ["off", "Ended"] : rot.from > today ? ["soon", "Upcoming"] : ["now", "Flying now"];
+            return el("tr", {},
+              el("td", { class: "mono flt", text: rot.out || "–" }),
+              el("td", { class: "mono flt", text: rot.back || "–" }),
+              el("td", { text: fmtRange(rot.from, rot.to) }),
+              el("td", {}, el("span", { class: `badge badge--${key}`, text }))
+            );
+          })
         );
       drawTabs();
       drawRows();

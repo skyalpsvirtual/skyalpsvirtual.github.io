@@ -159,10 +159,11 @@
           <div>
             <p class="eyebrow eyebrow--dark">Route network</p>
             <h2>From Bolzano to <span class="accent-text">Europe</span>.</h2>
-            <p class="section__lead">Every route, flight number and departure time comes from the real SkyAlps timetable. Pick a route to see when it operates.</p>
+            <p class="section__lead">Every route and flight number comes from the real SkyAlps timetable. Pick a route to see its rotations and when they fly.</p>
           </div>
           <div class="filters" role="group" aria-label="Filter routes">
-            <button class="chip is-active" data-filter="current">This season</button>
+            <button class="chip is-active" data-filter="now">Flying now</button>
+            <button class="chip" data-filter="soon">Coming soon</button>
             <button class="chip" data-filter="all">All routes</button>
             <button class="chip" data-filter="summer">Summer</button>
             <button class="chip" data-filter="winter">Winter</button>
@@ -177,6 +178,7 @@
               <li><i class="dot dot--year"></i>All year</li>
               <li><i class="dot dot--winter"></i>Winter only</li>
               <li><i class="dot dot--summer"></i>Summer only</li>
+              <li id="legend-later" hidden><i class="dash"></i>Not flying now</li>
             </ul>
           </div>
           <aside class="network__list">
@@ -202,18 +204,16 @@
             <table class="timetable">
               <thead>
                 <tr>
-                  <th scope="col">Day</th>
                   <th scope="col" id="rd-out-head">Outbound</th>
-                  <th scope="col">Flight</th>
                   <th scope="col" id="rd-back-head">Return</th>
-                  <th scope="col">Flight</th>
                   <th scope="col">Valid</th>
+                  <th scope="col">Status</th>
                 </tr>
               </thead>
               <tbody id="rd-rows"></tbody>
             </table>
           </div>
-          <p class="fine">Local times. The timetable may change; it reflects the SkyAlps schedule published on 15 September 2026.</p>
+          <p class="fine">Dates follow the SkyAlps timetable published on 15 September 2026 and may change.</p>
         </div>
       </div>
     </section>
