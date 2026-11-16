@@ -1,9 +1,111 @@
 {
-  "status": "pending",
-  "generatedAt": null,
-  "totals": { "flights": 0, "blockMinutes": 0, "pilots": 0, "pax": 0, "avgRating": null },
-  "last30": { "flights": 0, "blockMinutes": 0 },
-  "recent": [],
-  "topPilots": [],
-  "topRoutes": []
+  "generatedAt": "2026-11-16T16:26:13.502Z",
+  "status": "ok",
+  "totals": {
+    "flights": 6,
+    "blockMinutes": 692,
+    "pilots": 1,
+    "pax": 468,
+    "avgRating": 9.9
+  },
+  "last30": {
+    "flights": 6,
+    "blockMinutes": 692
+  },
+  "recent": [
+    {
+      "flightNumber": "SWU1933",
+      "dep": "EGKK",
+      "arr": "LIPB",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 137,
+      "rating": 10,
+      "date": "2026-11-11T18:53:38.249Z"
+    },
+    {
+      "flightNumber": "SWU1932",
+      "dep": "LIPB",
+      "arr": "EGKK",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 151,
+      "rating": 9.92,
+      "date": "2026-11-09T19:22:29.356Z"
+    },
+    {
+      "flightNumber": "SWU1951",
+      "dep": "EDDB",
+      "arr": "LIPB",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 104,
+      "rating": 10,
+      "date": "2026-11-08T16:40:40.409Z"
+    },
+    {
+      "flightNumber": "SWU1950",
+      "dep": "LIPB",
+      "arr": "EDDB",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 96,
+      "rating": 9.71,
+      "date": "2026-11-07T17:05:17.062Z"
+    },
+    {
+      "flightNumber": "SWU1953",
+      "dep": "EDDL",
+      "arr": "LIPB",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 112,
+      "rating": 10,
+      "date": "2026-11-06T16:14:38.640Z"
+    },
+    {
+      "flightNumber": "SWU1952",
+      "dep": "LIPB",
+      "arr": "EDDL",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 92,
+      "rating": 9.52,
+      "date": "2026-11-05T16:02:18.771Z"
+    }
+  ],
+  "topPilots": [
+    {
+      "name": "Athan C.",
+      "flights": 6,
+      "blockMinutes": 692
+    }
+  ],
+  "topRoutes": [
+    {
+      "dep": "EGKK",
+      "arr": "LIPB",
+      "flights": 1
+    },
+    {
+      "dep": "LIPB",
+      "arr": "EGKK",
+      "flights": 1
+    },
+    {
+      "dep": "EDDB",
+      "arr": "LIPB",
+      "flights": 1
+    },
+    {
+      "dep": "LIPB",
+      "arr": "EDDB",
+      "flights": 1
+    },
+    {
+      "dep": "EDDL",
+      "arr": "LIPB",
+      "flights": 1
+    }
+  ]
 }
