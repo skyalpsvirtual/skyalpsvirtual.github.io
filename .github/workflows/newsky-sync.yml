@@ -60,10 +60,23 @@ jobs:
       # Maintenance mode: repository variable MAINTENANCE_MODE = "on"
       # (Settings > Secrets and variables > Actions > Variables).
       # The published home page becomes site/maintenance.html; the files in the repository are not changed.
+      # Optional repository SECRET MAINTENANCE_PREVIEW_KEY: the real home page is also published at /<key>.html,
+      # hidden from search engines, so the staff can keep using the site. It is a secret rather than a variable
+      # so the key is masked in the run logs, which are public.
       # Must stay after "Commit updated data": that step rebases, which needs a clean working tree.
       - name: Maintenance mode
         if: vars.MAINTENANCE_MODE == 'on'
-        run: cp site/maintenance.html site/index.html
+        env:
+          PREVIEW_KEY: ${{ secrets.MAINTENANCE_PREVIEW_KEY }}
+        run: |
+          if [ -n "$PREVIEW_KEY" ]; then
+            if [[ "$PREVIEW_KEY" =~ ^[A-Za-z0-9_-]{12,}$ ]]; then
+              sed 's|<head>|<head>\n  <meta name="robots" content="noindex, nofollow">|' site/index.html > "site/$PREVIEW_KEY.html"
+            else
+              echo "::warning title=Preview page not published::MAINTENANCE_PREVIEW_KEY must be at least 12 characters: letters, digits, - or _ only."
+            fi
+          fi
+          cp site/maintenance.html site/index.html
 
       - uses: actions/configure-pages@v6
         if: steps.sync.outputs.changed == 'true' || github.event_name != 'schedule'
