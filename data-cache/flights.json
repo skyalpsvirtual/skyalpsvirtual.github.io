@@ -138,6 +138,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "47c45462121d": {
+   "id": "47c45462121d",
+   "flightNumber": "SWU1918",
+   "dep": "LIBC",
+   "arr": "LIRF",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-17T18:17:40.945Z",
+   "blockMin": 82,
+   "rating": 8.09,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 111,
+    "pingsTotal": 112,
+    "ratio": 0.9910714285714286,
+    "lastPing": "2026-11-17T18:17:09.623Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
