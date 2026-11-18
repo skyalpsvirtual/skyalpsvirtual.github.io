@@ -161,6 +161,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "9e9f85cb2a4a": {
+   "id": "9e9f85cb2a4a",
+   "flightNumber": "SWU1919",
+   "dep": "LIRF",
+   "arr": "LIBC",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-18T00:10:10.343Z",
+   "blockMin": 72,
+   "rating": 10,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 96,
+    "pingsTotal": 96,
+    "ratio": 1,
+    "lastPing": "2026-11-18T00:09:49.536Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }

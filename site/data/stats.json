@@ -1,18 +1,28 @@
 {
-  "generatedAt": "2026-11-17T19:32:03.600Z",
+  "generatedAt": "2026-11-18T04:10:24.584Z",
   "status": "ok",
   "totals": {
-    "flights": 7,
-    "blockMinutes": 774,
+    "flights": 8,
+    "blockMinutes": 846,
     "pilots": 1,
-    "pax": 546,
-    "avgRating": 9.6
+    "pax": 624,
+    "avgRating": 9.7
   },
   "last30": {
-    "flights": 7,
-    "blockMinutes": 774
+    "flights": 8,
+    "blockMinutes": 846
   },
   "recent": [
+    {
+      "flightNumber": "SWU1919",
+      "dep": "LIRF",
+      "arr": "LIBC",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 72,
+      "rating": 10,
+      "date": "2026-11-18T00:10:10.343Z"
+    },
     {
       "flightNumber": "SWU1918",
       "dep": "LIBC",
@@ -87,11 +97,16 @@
   "topPilots": [
     {
       "name": "Athan C.",
-      "flights": 7,
-      "blockMinutes": 774
+      "flights": 8,
+      "blockMinutes": 846
     }
   ],
   "topRoutes": [
+    {
+      "dep": "LIRF",
+      "arr": "LIBC",
+      "flights": 1
+    },
     {
       "dep": "LIBC",
       "arr": "LIRF",
@@ -110,11 +125,6 @@
     {
       "dep": "EDDB",
       "arr": "LIPB",
-      "flights": 1
-    },
-    {
-      "dep": "LIPB",
-      "arr": "EDDB",
       "flights": 1
     }
   ]
