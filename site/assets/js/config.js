@@ -12,7 +12,7 @@ window.SKYALPS_CONFIG = {
   newskyMapToken: "SWU_TdBryljD20wHuDpNZKBlSuQw6yUQ4j",
 
   // Discord invite link, e.g. "https://discord.gg/xxxxxxx". Empty = Discord buttons are hidden.
-  discordUrl: "",
+  discordUrl: "https://discord.gg/98kQ8Hpd3h",
 
   // Contact address shown in the footer. Empty = hidden.
   contactEmail: "",
