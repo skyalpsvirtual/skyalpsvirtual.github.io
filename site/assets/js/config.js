@@ -15,5 +15,5 @@ window.SKYALPS_CONFIG = {
   discordUrl: "https://discord.gg/98kQ8Hpd3h",
 
   // Contact address shown in the footer. Empty = hidden.
-  contactEmail: "",
+  contactEmail: "skyalpsvirtual@protonmail.com",
 };
