@@ -230,6 +230,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "262309cc4461": {
+   "id": "262309cc4461",
+   "flightNumber": "SWU1993",
+   "dep": "LOWS",
+   "arr": "LIRF",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-21T14:48:44.276Z",
+   "blockMin": 85,
+   "rating": 8.88,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 118,
+    "pingsTotal": 119,
+    "ratio": 0.9915966386554622,
+    "lastPing": "2026-11-21T14:48:34.292Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
