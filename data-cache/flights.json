@@ -207,6 +207,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "33a43af0c133": {
+   "id": "33a43af0c133",
+   "flightNumber": "SWU1992",
+   "dep": "LIRF",
+   "arr": "LOWS",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-20T22:35:40.743Z",
+   "blockMin": 125,
+   "rating": 10,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 129,
+    "pingsTotal": 154,
+    "ratio": 0.8376623376623377,
+    "lastPing": "2026-11-20T22:34:53.425Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
