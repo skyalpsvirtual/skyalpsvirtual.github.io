@@ -253,6 +253,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "30fe591d2c5f": {
+   "id": "30fe591d2c5f",
+   "flightNumber": "SWU1990",
+   "dep": "LIRF",
+   "arr": "LOWK",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-22T02:16:55.368Z",
+   "blockMin": 86,
+   "rating": 10,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 114,
+    "pingsTotal": 114,
+    "ratio": 1,
+    "lastPing": "2026-11-22T02:16:14.791Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
