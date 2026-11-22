@@ -1,18 +1,38 @@
 {
-  "generatedAt": "2026-11-22T03:03:15.039Z",
+  "generatedAt": "2026-11-22T19:28:11.346Z",
   "status": "ok",
   "totals": {
-    "flights": 12,
-    "blockMinutes": 1235,
+    "flights": 14,
+    "blockMinutes": 1384,
     "pilots": 1,
-    "pax": 926,
+    "pax": 1082,
     "avgRating": 9.6
   },
   "last30": {
-    "flights": 12,
-    "blockMinutes": 1235
+    "flights": 14,
+    "blockMinutes": 1384
   },
   "recent": [
+    {
+      "flightNumber": "SWU1919",
+      "dep": "LIRF",
+      "arr": "LIBC",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 70,
+      "rating": 10,
+      "date": "2026-11-22T17:35:37.297Z"
+    },
+    {
+      "flightNumber": "SWU1991",
+      "dep": "LOWK",
+      "arr": "LIRF",
+      "pilot": "Athan C.",
+      "aircraft": "DH8D",
+      "blockMin": 79,
+      "rating": 8.82,
+      "date": "2026-11-22T12:33:02.499Z"
+    },
     {
       "flightNumber": "SWU1990",
       "dep": "LIRF",
@@ -92,40 +112,30 @@
       "blockMin": 151,
       "rating": 9.92,
       "date": "2026-11-09T19:22:29.356Z"
-    },
-    {
-      "flightNumber": "SWU1951",
-      "dep": "EDDB",
-      "arr": "LIPB",
-      "pilot": "Athan C.",
-      "aircraft": "DH8D",
-      "blockMin": 104,
-      "rating": 10,
-      "date": "2026-11-08T16:40:40.409Z"
-    },
-    {
-      "flightNumber": "SWU1950",
-      "dep": "LIPB",
-      "arr": "EDDB",
-      "pilot": "Athan C.",
-      "aircraft": "DH8D",
-      "blockMin": 96,
-      "rating": 9.71,
-      "date": "2026-11-07T17:05:17.062Z"
     }
   ],
   "topPilots": [
     {
       "name": "Athan C.",
-      "flights": 12,
-      "blockMinutes": 1235
+      "flights": 14,
+      "blockMinutes": 1384
     }
   ],
   "topRoutes": [
     {
+      "dep": "LIRF",
+      "arr": "LIBC",
+      "flights": 2
+    },
+    {
       "dep": "LIBC",
       "arr": "LIRF",
       "flights": 2
+    },
+    {
+      "dep": "LOWK",
+      "arr": "LIRF",
+      "flights": 1
     },
     {
       "dep": "LIRF",
@@ -135,16 +145,6 @@
     {
       "dep": "LOWS",
       "arr": "LIRF",
-      "flights": 1
-    },
-    {
-      "dep": "LIRF",
-      "arr": "LOWS",
-      "flights": 1
-    },
-    {
-      "dep": "LIRF",
-      "arr": "LIBC",
       "flights": 1
     }
   ]
