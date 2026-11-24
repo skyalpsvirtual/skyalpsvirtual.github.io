@@ -345,6 +345,29 @@
    "emergency": false,
    "closed": true,
    "deleted": false
+  },
+  "b1b700ba47e3": {
+   "id": "b1b700ba47e3",
+   "flightNumber": "SWU1951",
+   "dep": "EDDB",
+   "arr": "LIPB",
+   "pilotKey": "72358539ce86",
+   "pilot": "Athan C.",
+   "aircraft": "DH8D",
+   "date": "2026-11-24T13:36:27.287Z",
+   "blockMin": 108,
+   "rating": 10,
+   "pax": 78,
+   "network": {
+    "name": "vatsim",
+    "pings": 130,
+    "pingsTotal": 130,
+    "ratio": 1,
+    "lastPing": "2026-11-24T13:36:17.709Z"
+   },
+   "emergency": false,
+   "closed": true,
+   "deleted": false
   }
  }
 }
